@@ -1,0 +1,10 @@
+package com.jackey.demo2.exception;
+
+import java.util.Comparator;
+
+public class MarksComparator implements Comparator<Student> {
+    @Override
+    public int compare(Student o1, Student o2){
+        return Integer.compare(o1.getMarks(), o2.getMarks());
+    }
+}
