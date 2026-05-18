@@ -16,7 +16,20 @@ public class Teacher implements Comparable<Teacher> {
 
 
     public int compareTo(Teacher other){
-        return Double.compare(other.salary, this.salary);
+        // role compare
+        int roleCompare = this.role.compareTo(other.role);
+
+        if(roleCompare == 0){
+            // 2. salary compare (high to low)
+            int salaryCompare = Double.compare(other.salary, this.salary);
+
+            if (salaryCompare == 0){
+                // name compare
+                return this.name.compareTo(other.name);
+            }
+            return salaryCompare;
+        }
+        return roleCompare;
     }
 
     public String toString(){
