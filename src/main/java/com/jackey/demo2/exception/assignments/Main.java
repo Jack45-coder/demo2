@@ -1,11 +1,15 @@
 package com.jackey.demo2.exception.assignments;
 
+import java.text.spi.DateFormatProvider;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args){
-
         Scanner sc = new Scanner(System.in);
+
+        // Date Time Formatter
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 
         // =========================
         // ACCOUNT TYPE FIRST
@@ -62,12 +66,12 @@ public class Main {
 
             case 3:
                 accountType = AccountType.SALARY;
-                account = new SavingAccount(name, accNo, balance);
+                account = new SalaryAccount(name, accNo, balance);
                 break;
 
             default:
                 System.out.println("Invalid Account Type");
-                break;
+            break;
         }
 
 
@@ -91,6 +95,7 @@ public class Main {
         System.out.println("Account Number: "+ account.getAccount_number());
         System.out.println("Account Type: "+ accountType);
         System.out.println("Balance: "+ account.getBalance());
+        System.out.println("Account Created: " + account.getCreatedDate().format(dateTimeFormatter));
 
 
         // =========================
@@ -104,7 +109,7 @@ public class Main {
             System.out.println("2 -> Withdraw");
             System.out.println("3 -> Check Balance");
             System.out.println("4 -> Account Details");
-            System.out.println("5 -> Exist");
+            System.out.println("5 -> Exit");
 
             System.out.print("Enter Choice: ");
             choice = sc.nextInt();
@@ -117,6 +122,7 @@ public class Main {
                     try {
                         account.deposit(depAmt);
                         System.out.println("Amount Deposited Successfully.");
+                        System.out.println("Current Balance: " + account.getBalance());
                     } catch (InvalidAmountException e) {
                         throw new RuntimeException(e);
                     }
@@ -128,6 +134,8 @@ public class Main {
 
                     try {
                         account.withdraw(withAmt);
+                        System.out.println("Withdrawal Successful.");
+                        System.out.println("Current Balance: " + account.getBalance());
                     }catch (InsufficientBalanceException e){
                         System.out.println(e.getMessage());
                     }
@@ -142,6 +150,7 @@ public class Main {
                     System.out.println(user);
                     System.out.println("Balance: " + account.getBalance());
                     System.out.println("Account Class: " +account.getClass().getSimpleName());
+                    System.out.println("Created Date: " + account.getCreatedDate().format(dateTimeFormatter));
                 break;
 
                 case 5:

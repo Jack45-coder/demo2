@@ -1,14 +1,18 @@
 package com.jackey.demo2.exception.assignments;
 
+import java.time.LocalDateTime;
+
 public abstract class BankAccount {
     private String account_number;
     private String account_holder;
     private double balance;
+    private LocalDateTime createdDate;
 
     public BankAccount(String account_number, String account_holder, double balance) {
         this.account_number = account_number;
         this.account_holder = account_holder;
         this.balance = balance;
+        this.createdDate = LocalDateTime.now();
     }
 
     public BankAccount(){
@@ -43,5 +47,9 @@ public abstract class BankAccount {
 
     public void setAccount_holder(String account_holder) {
         this.account_holder = account_holder;
+    }
+
+    public LocalDateTime getCreatedDate(){
+        return createdDate;
     }
 }
